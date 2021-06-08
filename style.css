@@ -1,0 +1,779 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: consolas, sans-serif;
+  scroll-behavior: smooth;
+  scrollbar-color: var(--glavna) var(--druga);
+  scrollbar-width: thin;
+}
+
+:root {
+  --glavna: #fff;
+  --druga: #005eeb;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    transparent,
+    var(--druga),
+    var(--druga),
+    transparent
+  );
+  border-radius: 20px;
+}
+.spust {
+  background-color: var(--glavna);
+  height: 100vh;
+  width: 300px;
+  animation: spustanje 1s ease forwards;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  overflow-x: hidden;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.spust .slika {
+  height: 195px;
+  min-width: 195px;
+  border-radius: 50%;
+  background: var(--druga);
+  position: relative;
+  animation: spustanje 1.5s ease forwards;
+}
+.spust .slika::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: url(./img/ja.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 185px;
+  width: 185px;
+  border-radius: 50%;
+  z-index: 100;
+}
+
+.spust .slika::after {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: -11px;
+  border: 9px solid var(--druga);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: afterscale 1.2s infinite;
+}
+@keyframes afterscale {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+}
+.spust .navigacija {
+  height: 40%;
+}
+.navigacija .lista {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 70%;
+  text-align: center;
+  transform: translateX(-230px);
+  opacity: 0;
+  animation: leftsideappear 1.5s ease 1.2s forwards;
+}
+@keyframes leftsideappear {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.navigacija .lista a {
+  text-decoration: none;
+  color: var(--druga);
+  font-size: 1.3rem;
+  padding: 5px;
+  position: relative;
+  text-transform: uppercase;
+}
+.navigacija .lista a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 2px;
+  background: var(--druga);
+  transition: all 0.8s;
+}
+.navigacija .lista a:hover::before {
+  width: 100%;
+  background: transparent;
+}
+.navigacija .lista a:hover {
+  animation: animzalinkove 0.8s ease forwards;
+}
+.content {
+  margin-left: 300px;
+  position: relative;
+}
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--druga);
+  height: 90vh;
+  border-top-left-radius: 0;
+  animation: border200 0.8s ease 3.5s forwards;
+}
+@keyframes border200 {
+  to {
+    border-top-left-radius: 200px;
+  }
+}
+.banner .naslov {
+  color: var(--glavna);
+  height: 20%;
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+.naslov .svg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(130px);
+  opacity: 0;
+  animation: podnaslov 2s ease 1.5s forwards;
+}
+.banner .naslov svg {
+  height: 25px;
+  animation: svganimacija 0.7s ease 2.6s forwards;
+  transform: rotate(0);
+  opacity: 0;
+  padding-right: 2px;
+}
+
+@keyframes svganimacija {
+  50% {
+    transform: rotate(25deg);
+    opacity: 0.6;
+  }
+  80% {
+    transform: rotate(65deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+.naslov h1 {
+  font-weight: 500;
+  position: relative;
+}
+.naslov p {
+  font-weight: 200;
+  position: relative;
+  position: relative;
+  opacity: 0;
+  transform: translateY(130px);
+  animation: podnaslov 2s ease 1s forwards;
+}
+
+h1::before,
+h1::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+h1::before {
+  background: var(--druga);
+  animation: typewriter 3s steps(26) 0.2s forwards;
+}
+
+h1::after {
+  background: var(--glavna);
+  width: 0.125em;
+  animation: typewriter 3s steps(26) 0.2s forwards,
+    blink 0.5s steps(26) infinite;
+}
+
+@keyframes typewriter {
+  to {
+    left: 100%;
+  }
+}
+@keyframes blink {
+  to {
+    background: transparent;
+  }
+}
+@keyframes podnaslov {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes animzalinkove {
+  to {
+    background: var(--druga);
+    color: var(--glavna);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+}
+@keyframes spustanje {
+  from {
+    opacity: 0;
+    transform: translateY(-530px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media only screen and (max-width: 455px) {
+  .spust {
+    height: 8.2vh;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    top: unset;
+    left: unset;
+    animation: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+  }
+  .spust .slika {
+    height: 48px;
+    min-width: 48px;
+    border-radius: 50%;
+    animation: none;
+  }
+  .spust .slika::before {
+    top: 4px;
+    left: 4px;
+    height: 40px;
+    width: 40px;
+  }
+  .spust .slika::after {
+    content: "";
+    position: absolute;
+    top: -11px;
+    left: -11px;
+    border: 9px solid var(--druga);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: none;
+  }
+  .spust .navigacija {
+    height: 50%;
+    width: 80%;
+  }
+  .navigacija .lista {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    height: 10%;
+    width: 100%;
+    transform: translateX(0);
+    opacity: 1;
+    animation: none;
+    position: relative;
+  }
+
+  .navigacija .lista a {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding-right: 5px;
+    position: relative;
+  }
+  .navigacija .lista a:nth-child(1) {
+    all: unset;
+    display: none;
+  }
+  .navigacija .lista a::before {
+    all: unset;
+  }
+  .navigacija .lista a:hover {
+    animation: none;
+  }
+  .content {
+    margin-left: unset;
+  }
+  .banner {
+    height: 60vh;
+    position: relative;
+    border-top-left-radius: 0px;
+  }
+  .banner .naslov {
+    height: unset;
+    font-size: 0.64rem;
+    height: 30%;
+  }
+  .banner .naslov svg {
+    height: 20px;
+    animation: svganimacija 0.7s ease 2.6s forwards;
+    transform: rotate(0);
+    opacity: 0;
+    padding-right: 2px;
+  }
+}
+@media screen and (min-width: 456px) and (max-width: 900px) {
+  .banner .naslov {
+    height: unset;
+    font-size: 0.64rem;
+    height: 30%;
+  }
+}
+@media screen and (min-width: 456px) and (max-width: 1367px) {
+  .banner {
+    height: 60vh;
+  }
+  .banner .naslov {
+    height: 40%;
+  }
+}
+.about {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--glavna);
+  background: var(--druga);
+}
+.about .tekstovi {
+  font-size: 1.1rem;
+  font-weight: 300;
+  max-width: 900px;
+  height: 80%;
+}
+.about .tekstovi a {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--glavna);
+  letter-spacing: -1px;
+  border-bottom: 1px solid var(--glavna);
+}
+.about .tekstovi .fiverr {
+  text-decoration: none;
+  font-weight: 600;
+}
+.about .tekstovi .tekst p {
+  line-height: 2rem;
+}
+
+@media only screen and (max-width: 455px) {
+  .about {
+    height: 100vh;
+  }
+  .about .tekstovi {
+    font-size: 0.85rem;
+    max-width: 350px;
+    height: 100%;
+  }
+  .about .tekstovi a {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--glavna);
+    letter-spacing: -1px;
+    border-bottom: 1px solid var(--glavna);
+  }
+  .about .tekstovi .fiverr {
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .about .tekstovi .tekst p {
+    line-height: 2rem;
+  }
+}
+@media screen and (min-width: 456px) and (max-width: 1367px) {
+  .about {
+  }
+  .about .tekstovi {
+    padding: 20px;
+    max-height: 90vh;
+    font-size: 1rem;
+    overflow: hidden;
+  }
+}
+.projects,
+.gallery {
+  height: 70vh;
+  background: var(--druga);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.projects button,
+.gallery button {
+  color: rgb(158, 180, 228);
+  font-size: 5rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+  z-index: 5;
+  filter: blur(1px);
+  transition: 0.3s ease-in-out;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.projects button:hover,
+.gallery button:hover {
+  filter: blur(0);
+  color: var(--glavna);
+}
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -60%) scale(0);
+  transition: 200ms ease-in-out;
+  width: 1100px;
+  height: 700px;
+  z-index: 50;
+  background: var(--druga);
+  color: rgba(255, 255, 255, 0.808);
+}
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+}
+.modal-header button {
+  filter: blur(0);
+  font-size: 3rem;
+}
+.title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.modal-body {
+  padding: 15px;
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+.modal-body img {
+  height: 180px;
+  max-width: 350px;
+}
+.modal-body .flex-around,
+.modal-body .space-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.prve-dvije,
+.druge-dvije,
+.trece-dvije {
+  text-align: center;
+}
+.flex-around .druga {
+  padding-top: 40px;
+}
+
+.space-around img {
+  height: 290px;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: var(--glavna);
+  pointer-events: none;
+  transition: 0.4s ease-in-out;
+}
+#overlay.active {
+  pointer-events: all;
+  opacity: 1;
+}
+@media (min-width: 456px) and (max-width: 1367px) {
+  .projects,
+  .gallery {
+    height: 70vh;
+    background: var(--druga);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .projects button,
+  .gallery button {
+    color: var(--glavna);
+    font-size: 3.5rem;
+    filter: blur(0);
+  }
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -70%) scale(0);
+    transition: 200ms ease-in-out;
+    width: 60%;
+    height: 90%;
+    z-index: 50;
+    background: var(--druga);
+    color: var(--glavna);
+    overflow-y: scroll;
+  }
+  .modal.active {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+  }
+  .modal-header button {
+    filter: blur(0);
+    font-size: 3rem;
+  }
+
+  .modal-body {
+    font-size: 0.8rem;
+  }
+  .modal-body img {
+    height: 180px;
+    max-width: 350px;
+  }
+  .modal-body .flex-around,
+  .modal-body .space-around {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+  }
+  .prve-dvije,
+  .druge-dvije,
+  .trece-dvije {
+    text-align: center;
+  }
+  .flex-around .druga {
+    padding: 30px 0;
+  }
+
+  .space-around img {
+    height: 290px;
+    padding-bottom: 20px;
+  }
+}
+@media screen and (max-width: 456px) {
+  .projects,
+  .gallery {
+    height: 40vh;
+  }
+  .projects button,
+  .gallery button {
+    font-size: 2.5rem;
+    color: var(--glavna);
+    filter: blur(0);
+  }
+
+  .projects button:hover,
+  .gallery button:hover {
+    filter: blur(0);
+    color: var(--glavna);
+  }
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 85%;
+    height: 90%;
+    z-index: 50;
+    overflow-y: scroll;
+  }
+  .modal.active {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .modal-header button {
+    filter: blur(0);
+    font-size: 2rem;
+  }
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .modal-body {
+    padding: 15px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+  .modal-body img {
+    height: 150px;
+    max-width: 250px;
+  }
+  .modal-body .flex-around,
+  .modal-body .space-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+  }
+  .prve-dvije,
+  .druge-dvije,
+  .trece-dvije {
+    text-align: center;
+    padding-bottom: 25px;
+  }
+  .flex-around .druga {
+    padding-top: 40px;
+  }
+
+  .space-around img {
+    height: 190px;
+  }
+}
+.contact {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background: var(--druga);
+  border-bottom-left-radius: 0;
+  animation: border201 0.8s ease 3.5s forwards;
+}
+@keyframes border201 {
+  to {
+    border-bottom-left-radius: 200px;
+  }
+}
+.contact .contactMe {
+  text-align: center;
+  color: var(--glavna);
+}
+.contactMe h5 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+.contact .contactMe svg {
+  animation: strijelica 1.3s linear infinite;
+  margin: 15px;
+  fill: var(--glavna);
+}
+
+@keyframes strijelica {
+  0%,
+  100% {
+    transform: translateY(-12px);
+  }
+  50% {
+    transform: translateY(12px);
+  }
+}
+.contact .socials {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+}
+.contact .socials .wrap {
+  display: flex;
+  flex-direction: column;
+}
+.contact .socials a {
+  color: rgba(255, 255, 255, 0.692);
+  position: relative;
+  font-family: consolas;
+}
+.socials a:hover {
+  color: var(--glavna);
+}
+@media only screen and (max-width: 455px) {
+  .contact {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: var(--druga);
+    border-bottom-left-radius: 0px;
+  }
+  .contact .contactMe {
+    text-align: center;
+    color: var(--glavna);
+  }
+  .contactMe h2 {
+    font-size: 1.2rem;
+  }
+  .contactMe h5 {
+    font-size: 1rem;
+    color: var(--glavna);
+  }
+  .contact .contactMe svg {
+    margin: 18px;
+  }
+
+  .contact .socials {
+    flex-direction: column;
+    height: 30%;
+    margin-bottom: 25px;
+  }
+
+  .contact .socials a {
+    color: var(--glavna);
+  }
+}
+@media screen and (min-width: 456px) and (max-width: 1367px) {
+  .contact {
+    height: 80vh;
+  }
+}
+.reveal {
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: all 1s;
+}
+.reveal.active {
+  transform: translateY(0px);
+  opacity: 1;
+}
